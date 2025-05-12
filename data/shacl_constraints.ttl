@@ -1,0 +1,159 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix mpo: <http://www.theworldavatar.com/kg/ontomatpassport/> .
+@prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+
+# Each Product or Component must have a unique identifier.
+mpo:ProductOrComponentIdShape a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+	sh:targetClass mpo:Component ;
+    sh:property [
+        sh:path mpo:id ; # Check the mpo:id property
+        sh:message "Each Product must have a unique identifier (mpo:id)" ;
+        sh:sparql [
+            sh:prefixes (mpo:) ; 
+            sh:select """
+                PREFIX mpo: <http://www.theworldavatar.com/kg/ontomatpassport#>
+                SELECT ?this
+                WHERE {
+                    ?this mpo:id ?id1 .
+                    ?other mpo:id ?id2 .
+                    ?this a mpo:Product .
+                    ?other a mpo:Product .
+                    FILTER ((?id1 = ?id2 && ?this != ?other) || (?id1 != ?id2 && ?this = ?other)) # Find cases where mpo:id is not unique
+                }
+            """ ;
+        ] ;
+    ] .
+
+# Each product or component must have at least one associated manufacturer.
+mpo:ProductOrComponentManufacturerShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+    sh:targetClass mpo:Component ;
+    sh:property [
+        sh:path mpo:hasManufacturer ;
+        sh:minCount 1 ;
+        sh:message "Each product or component must have at least one associated manufacturer." ;
+    ] .
+
+#It indicates whether individual classes contains hazardous materials.
+mpo:ProductHazardousShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+    sh:or (
+        # Non-hazardous products
+        [
+            sh:not [
+                sh:path mpo:isHazardous ;
+                sh:hasValue true ;
+            ]
+        ]
+        # Hazardous products with a compulsory hazard summary document
+        [
+            sh:property [
+                sh:path mpo:hasHazardSummaryDocument ;
+                sh:minCount 1 ;
+                sh:nodeKind sh:IRI ;
+                sh:pattern "^https?://.+" ;
+            ]
+        ]
+    ) ;
+    sh:message "If a product is hazardous, it must have a hazard summary document through a valid URL starting with 'http://' or 'https://'." .
+
+# Each product or component must have at least one of GTIN or EAN. GTIN is optional 8, 12, 13 or 14-digit number.
+mpo:ProductAndComponentGtinOrEanShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+	sh:targetClass mpo:Component ;
+    sh:or (
+        [ 
+            sh:path mpo:hasGTIN ; 
+            sh:minCount 1 ;
+            sh:datatype xsd:string ;
+            sh:pattern "^\\d+$" ;
+            sh:or(
+                [
+                    sh:minLength 8 ;  
+                    sh:maxLength 8 ;
+                ][
+                    sh:minLength 12 ;  
+                    sh:maxLength 14 ; 
+                ]
+            )
+        ]
+        [ 
+            sh:path mpo:hasEAN ; 
+            sh:minCount 1 ;
+            sh:datatype xsd:string ;
+            sh:pattern "^\\d+$" ;
+            sh:or(
+                [
+                    sh:minLength 8 ;  
+                    sh:maxLength 8 ;
+                ][
+                    sh:minLength 13 ;  
+                    sh:maxLength 13 ;
+                ]
+            )
+        ]
+    ) ;
+    sh:message "A Product must have at least a GTIN or EAN." .
+
+
+# Each product or component may have hasMCI value such that 0 ≤ MCI ≤ 1.
+mpo:ProductOrComponentMCIShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+	sh:targetClass mpo:Component ;
+    sh:property [
+        sh:path mpo:hasMCI ;
+        sh:datatype xsd:float ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 1 ;
+        sh:message "The MCI value must be a float between 0 and 1." ;
+    ] .
+
+# Each Product or Component must specify whether they are biodegradable.
+mpo:ProductOrComponentBiodegradableShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Product ;
+	sh:targetClass mpo:Component ;
+    sh:property [
+        sh:path mpo:isBiodegradable ;
+        sh:datatype xsd:boolean ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:message "Each Product or Component must specify whether it is biodegradable (true or false)." .
+	
+# Specify the mass, virgin content mass, total waste mass, etc., of each product or component.
+mpo:KilogramMassShape
+    a sh:NodeShape ;
+    sh:targetClass mpo:Mass ;
+    sh:targetClass mpo:VirginContentMass ;
+    sh:targetClass mpo:TotalWasteMass ;
+    sh:targetClass mpo:WasteMassAfterTakingRecyclableReusablePortion ;
+    sh:targetClass mpo:WasteMassGeneratedInRecyclingCollectedPortion ;
+    sh:targetClass mpo:WasteMassGeneratedInProducingRecylcedFeedstock ;
+
+    sh:property [
+        sh:path om-2:hasValue ;
+        sh:node [
+            sh:property [
+                sh:path om-2:hasNumericalValue ;
+                sh:datatype xsd:float ;
+                sh:minInclusive 0 ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+            ] ;
+            sh:property [
+                sh:path om-2:hasUnit ;
+                sh:hasValue om-2:kilogram ;
+                sh:minCount 1 ;
+                sh:maxCount 1 ;
+                sh:nodeKind sh:IRI ;
+                sh:message "Mass units must be om-2:kilogram." ;
+            ]
+        ]
+    ] .

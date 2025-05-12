@@ -1,0 +1,214 @@
+@prefix : <http://www.theworldavatar.com/kg/ontomatpassport/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+om-2:centimetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:cubicMetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:day a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:gallon-Imperial a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:gallon-US a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:gramPerCubicCentimetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:joulePerKelvinKilogram a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:kilogramOfCarbonDioxideEquivalent a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:kilogramPerCubicmetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:litre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:megapascal a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:metre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:milligram a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:millimetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:millipascal a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:month a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:pascal a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:percent a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:tonnePerCubicmetre a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:wattPerMetreKelvin a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:wattPerSquareMetreKelvin a om-2:Unit,
+        owl:NamedIndividual .
+
+om-2:year a om-2:Unit,
+        owl:NamedIndividual .
+
+: a owl:Ontology ;
+    dc:date "08 May 2025" ;
+    :gitCommitHash "c0599beca8df55873a1ab061dee64e52c510c6a0" ;
+    rdfs:comment "A material passport for a chassis crossbeam is created with synthetic data represented using the Material Passport Ontology (MPO)." ;
+    owl:versionInfo "1" .
+
+:CrossBeamMatPass a :MaterialPassport,
+        owl:NamedIndividual ;
+    dc:creator :Adler ;
+    :describes :CrossBeam .
+
+om-2:gram a om-2:Unit,
+        owl:NamedIndividual .
+
+:Adler a :Manufacturer,
+        owl:NamedIndividual .
+
+:Almas a :Manufacturer,
+        owl:NamedIndividual ;
+    :hasCountry :Italy .
+
+:CrossBeam a :Product,
+        owl:NamedIndividual ;
+    :hasGTIN "01234567890123" ;
+    :hasLFI "0.5"^^xsd:float ;
+    :hasMCI "0.55"^^xsd:float ;
+    :hasManufacturer :Almas ;
+    :hasProperty :CrossBeamCR,
+        :CrossBeamCU,
+        :CrossBeamEC,
+        :CrossBeamEF,
+        :CrossBeamFR,
+        :CrossBeamFU,
+        :CrossBeamLFI,
+        :CrossBeamMCI,
+        :CrossBeamMass,
+        :CrossBeamV,
+        :CrossBeamW,
+        :CrossBeamW0,
+        :CrossBeamWC,
+        :CrossBeamWF;
+    :id "d03ffeb9-f71b-4a2e-91ba-ecbaefa1e9e9" ;
+    :isBiodegradable false ;
+    :isHazardous false .
+
+:CrossBeamCR a :ProductFractionCollectedForRecycling ;
+    om-2:hasValue :CrossBeamCRMeasure .
+
+:CrossBeamCRMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.4"^^xsd:float .
+
+:CrossBeamCU a :ProductFractionCollectedForReuse ;
+    om-2:hasValue :CrossBeamCUMeasure .
+
+:CrossBeamCUMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.3"^^xsd:float .
+
+:CrossBeamEC a :RecyclingEfficiencyForPortionCollectedForRecycling ;
+    om-2:hasValue :CrossBeamECMeasure .
+
+:CrossBeamECMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.5"^^xsd:float .
+
+:CrossBeamEF a :RecyclingEfficiencyForProducingFeedstock ;
+    om-2:hasValue :CrossBeamEFMeasure .
+
+:CrossBeamEFMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.5"^^xsd:float .
+
+:CrossBeamFR a :FeedstockFractionFromRecycledProduct ;
+    om-2:hasValue :CrossBeamFRMeasure .
+
+:CrossBeamFRMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.3"^^xsd:float .
+
+:CrossBeamFU a :FeedstockFractionFromReusedProduct ;
+    om-2:hasValue :CrossBeamFUMeasure .
+
+:CrossBeamFUMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.2"^^xsd:float .
+
+:CrossBeamLFI a :LinearFlowIndex ;
+    om-2:hasValue :CrossBeamLFIMeasure .
+
+:CrossBeamLFIMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.5"^^xsd:float .
+
+:CrossBeamMCI a :MaterialCircularityIndicator ;
+    om-2:hasValue :CrossBeamMCIMeasure .
+
+:CrossBeamMCIMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.55"^^xsd:float .
+
+:CrossBeamMass a :Mass;
+    om-2:hasValue :CrossBeamMassMeasure .
+
+:CrossBeamMassMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "1.386"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:CrossBeamV a :VirginContentMass ;
+    om-2:hasValue :CrossBeamVMeasure .
+
+:CrossBeamVMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.693"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:CrossBeamW a :TotalWasteMass ;
+    om-2:hasValue :CrossBeamWMeasure .
+
+:CrossBeamW0 a :WasteMassAfterTakingRecyclableReusablePortion ;
+    om-2:hasValue :CrossBeamW0Measure .
+
+:CrossBeamW0Measure a om-2:Measure ;
+    om-2:hasNumericalValue "0.4158"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:CrossBeamWC a :WasteMassGeneratedInRecyclingCollectedPortion ;
+    om-2:hasValue :CrossBeamWCMeasure .
+
+:CrossBeamWCMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.2772"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:CrossBeamWF a :WasteMassGeneratedInProducingRecylcedFeedstock ;
+    om-2:hasValue :CrossBeamWFMeasure .
+
+:CrossBeamWFMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.693"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:CrossBeamWMeasure a om-2:Measure ;
+    om-2:hasNumericalValue "0.9009"^^xsd:float ;
+    om-2:hasUnit om-2:kilogram .
+
+:Italy a owl:NamedIndividual,
+        <https://dbpedia.org/ontology/Country> .
+
+om-2:kilogram a om-2:Unit .
+om-2:percent a om-2:Unit .
+
