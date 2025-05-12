@@ -168,6 +168,8 @@ public class SHACLValidatorAgent {
                 RDFDataMgr.read(model, inputStream, RDFLanguages.RDFXML);
             } else if (fileExtension.endsWith(".jsonld")) {
                 RDFDataMgr.read(model, inputStream, RDFLanguages.JSONLD);
+            } else if (fileExtension.endsWith(".owl")) {
+                RDFDataMgr.read(model, inputStream, RDFLanguages.RDFXML);
             } else {
                 // Add handling for other formats as needed
                 throw new IllegalArgumentException("Unsupported RDF file format");
