@@ -95,8 +95,6 @@ om-2:gram a om-2:Unit,
 :CrossBeam a :Product,
         owl:NamedIndividual ;
     :hasGTIN "01234567890123" ;
-    :hasLFI "0.5"^^xsd:float ;
-    :hasMCI "0.55"^^xsd:float ;
     :hasManufacturer :Almas ;
     :hasProperty :CrossBeamCR,
         :CrossBeamCU,
