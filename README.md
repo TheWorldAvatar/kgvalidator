@@ -1,40 +1,56 @@
 # The World Avatar (TWA) KG Validator
-An agent developed for validating constraints defined using the Shapes Constraint Language (SHACL) to validate restrictions imposed on ontologised data represented in RDF or its variations such as OWL, Turtle and JSON-LD.
+An agent developed for validating the conformance of ontologised data (knowledge graph) represented in RDF or its variations such as OWL, Turtle and JSON-LD to constraints defined using the Shapes Constraint Language (SHACL).
 
+---
 ## How to run the TWA KG Validator
-1. **Build the project using Maven:**
-   Run the following maven command to build the code and generate a JAR file:
-    ```bash
-    mvn clean install -DskipTests
-    ```
+### 1. **Build the project using Maven:**
+Run the following maven command to build the code and generate a JAR file:
+```bash
+mvn clean install -DskipTests
+```
 
-2. **Navigate to the `target` folder:""
-    ```bash
-    cd target
-    ```
+### 2. ** Run the validator**
 
-3. **Run the the JAR file:**
-    ```bash
-    java -jar shacl-validation-agent.jar
-    ```
+#### 2.1 **From your code**
+Run the JAR file with the knowledge graph file path and SHACL constraints file path:
+```bash
+java -jar ./target/shacl-validation-agent.jar <knowledge graph file path> <SHACL constraints file path>
+```
+For example,
+```bash
+java -jar ./target/shacl-validation-agent.jar ./data/kg.ttl ./data/shacl_constraints.ttl
+```
+Run the above command from within your knowledge graph generation code to check conformance.
+Go to **step 7** for validation results.
+	
+#### 2.2 **Manually**
+Run the the JAR file:
+```bash
+java -jar shacl-validation-agent.jar
+```
 
-4. **Return to the root project directory:**
-    ```bash
-    cd ..
-    ```
-5. **Open the HTML interface:**
-   Either double-click the `index.html` or run:
-    ```bash
-    start index.html
-    ```
-6. **Load a knowledge graph:**
-   In the browser, click the `Choose File` button and select the file `./data/kg.ttl` file.
+### 3. **Open the HTML interface:**
+Either double-click the `index.html` or run:
+```bash
+start index.html
+```
 
-7. **Load the SHACL constraints:**
-   Click the second `Choose File` button and select the file `./data/shacl_constraints.ttl` file.
+### 4. **Load a knowledge graph:**
+   In the browser, click the `Choose File` button and select `./data/kg.ttl`.
 
-8. **Validate the knowledge graph:**
+### 5. **Load the SHACL constraints:**
+   Click the second `Choose File` button and select `./data/shacl_constraints.ttl`.
+
+### 6. **Validate the knowledge graph:**
    Click the `Validate` button to check whether the knowledge graph satisfies the defined SHACL constraints.
 
-# Authors #
-Hanif Seddiqui (mhs62@cam.ac.uk), Feroz Farazi (msff2@cam.ac.uk), 09 May 2025
+### 7. **Interpret the Result**
+   The validator returns `true` if the knowledge graph conforms to the SHACL constraints. Otherwise, it return `false` along with an explanation of the violoations.
+
+## Authors
+
+---
+
+- **Hanif Seddiqui** (mhs62@cam.ac.uk)  
+- **Feroz Farazi** (msff2@cam.ac.uk)  
+*Date: 09 May 2025*
