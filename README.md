@@ -36,7 +36,7 @@ start index.html
 ```
 
 ### 4. **Load a knowledge graph:**
-   In the browser, click the `Choose File` button and select `./data/kg.ttl`.
+   In the browser, click the first `Choose File` button and select `./data/kg.ttl`.
 
 ### 5. **Load the SHACL constraints:**
    Click the second `Choose File` button and select `./data/shacl_constraints.ttl`.
@@ -45,7 +45,7 @@ start index.html
    Click the `Validate` button to check whether the knowledge graph satisfies the defined SHACL constraints.
 
 ### 7. **Interpret the Result**
-   The validator returns `true` if the knowledge graph conforms to the SHACL constraints. Otherwise, it returns `false` along with an explanation of the violoations.
+   The validator returns `true` if the knowledge graph conforms to the SHACL constraints. Otherwise, it returns `false` along with an explanation of the violations.
 
 ## Authors
 
