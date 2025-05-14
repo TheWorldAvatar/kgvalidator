@@ -45,7 +45,7 @@ start index.html
    Click the `Validate` button to check whether the knowledge graph satisfies the defined SHACL constraints.
 
 ### 7. **Interpret the Result**
-   The validator returns `true` if the knowledge graph conforms to the SHACL constraints. Otherwise, it return `false` along with an explanation of the violoations.
+   The validator returns `true` if the knowledge graph conforms to the SHACL constraints. Otherwise, it returns `false` along with an explanation of the violoations.
 
 ## Authors
 
