@@ -18,7 +18,7 @@ java -jar ./target/shacl-validation-agent.jar <knowledge graph file path> <SHACL
 ```
 For example,
 ```bash
-java -jar ./target/shacl-validation-agent.jar ./data/kg.ttl ./data/shacl_constraints.ttl
+java -jar ./target/shacl-validation-agent.jar ./data/MatPassportChassisCrossbeamKnowledgeGraph.owl ./data/shacl_constraints.ttl
 ```
 Run the above command from within your knowledge graph generation code to check conformance.
 Go to **step 7** for validation results.
@@ -36,7 +36,7 @@ start index.html
 ```
 
 ### 4. **Load a knowledge graph:**
-   In the browser, click the first `Choose File` button and select `./data/kg.ttl`.
+   In the browser, click the first `Choose File` button and select `./data/MatPassportChassisCrossbeamKnowledgeGraph.owl`.
 
 ### 5. **Load the SHACL constraints:**
    Click the second `Choose File` button and select `./data/shacl_constraints.ttl`.
