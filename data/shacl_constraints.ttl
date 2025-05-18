@@ -2,6 +2,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix mpo: <http://www.theworldavatar.com/kg/ontomatpassport/> .
 @prefix om-2: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
+@prefix emmo: <http://emmo.info/emmo#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 # Each Product or Component must have a unique identifier.
 mpo:ProductOrComponentIdShape a sh:NodeShape ;
@@ -98,7 +100,7 @@ mpo:ProductAndComponentGtinOrEanShape
             )
         ]
     ) ;
-    sh:message "A Product must have at least a GTIN or EAN." .
+    sh:message "A product or component must have at least a GTIN or EAN." .
 
 
 # Each product or component may have hasMCI value such that 0 ≤ MCI ≤ 1.
@@ -127,15 +129,10 @@ mpo:ProductOrComponentBiodegradableShape
     ] ;
     sh:message "Each Product or Component must specify whether it is biodegradable (true or false)." .
 	
-# Specify the mass, virgin content mass, total waste mass, etc., of each product or component.
+# Specify the mass of each product, component or material.
 mpo:KilogramMassShape
     a sh:NodeShape ;
     sh:targetClass mpo:Mass ;
-    sh:targetClass mpo:VirginContentMass ;
-    sh:targetClass mpo:TotalWasteMass ;
-    sh:targetClass mpo:WasteMassAfterTakingRecyclableReusablePortion ;
-    sh:targetClass mpo:WasteMassGeneratedInRecyclingCollectedPortion ;
-    sh:targetClass mpo:WasteMassGeneratedInProducingRecylcedFeedstock ;
 
     sh:property [
         sh:path om-2:hasValue ;
@@ -156,4 +153,17 @@ mpo:KilogramMassShape
                 sh:message "Mass units must be om-2:kilogram." ;
             ]
         ]
+    ] ;
+
+    sh:property [
+        sh:path [ sh:inversePath mpo:hasProperty ] ;
+        sh:or (
+            [ sh:class mpo:Product ]
+            [ sh:class mpo:Component ]
+            [ sh:class emmo:EMMO_4207e895_8b83_4318_996a_72cfb32acd94 ]
+			[ sh:class mpo:ConstituentMaterial ]
+			[ sh:class mpo:ConstituentPart ]
+        ) ;
+        sh:minCount 1 ;
+        sh:message "Each mpo:Mass must be referenced via mpo:hasProperty from a Product, Component, Material, ConstituentMaterial or ConstituentPart." ;
     ] .

@@ -4,7 +4,7 @@ An agent developed for validating the conformance of ontologised data (knowledge
 ---
 ## How to run the TWA KG Validator
 ### 1. **Build the project using Maven:**
-Run the following maven command to build the code and generate a JAR file:
+Assuming that you already have Maven and JDK 11 installed on your computer. Run the following maven command to build the code and generate a JAR file:
 ```bash
 mvn clean install -DskipTests
 ```
@@ -26,7 +26,7 @@ Go to **step 7** for validation results.
 #### 2.2 **Manually**
 Run the the JAR file:
 ```bash
-java -jar shacl-validation-agent.jar
+java -jar ./target/shacl-validation-agent.jar
 ```
 
 ### 3. **Open the HTML interface:**
