@@ -129,7 +129,7 @@ mpo:ProductOrComponentBiodegradableShape
     ] ;
     sh:message "Each Product or Component must specify whether it is biodegradable (true or false)." .
 	
-# Specify the mass of each product, component or material.
+# Specify the mass of each product, component, constituent material or constituent part in kilograms.
 mpo:KilogramMassShape
     a sh:NodeShape ;
     sh:targetClass mpo:Mass ;
@@ -165,5 +165,5 @@ mpo:KilogramMassShape
 			[ sh:class mpo:ConstituentPart ]
         ) ;
         sh:minCount 1 ;
-        sh:message "Each mpo:Mass must be referenced via mpo:hasProperty from a Product, Component, Material, ConstituentMaterial or ConstituentPart." ;
+        sh:message "Each mpo:Mass must be referenced via mpo:hasProperty from a product, component, material, constituent material (EMMO_4207e895_8b83_4318_996a_72cfb32acd94) or constituent part." ;
     ] .
